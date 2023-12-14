@@ -27,8 +27,8 @@ export default function App() {
   // }, [isPresent]);
   return (
     // <div className="pt-[80vh] pb-[50vh] flex flex-col gap-32">
-    <div className="pb-[50vh] ">
-      <div className="h-[100vh] pt-[20vh] flex flex-col gap-10">
+    <div className="pb-[50vh] w-full flex flex-col justify-center">
+      <div className="h-[100vh] pt-[20vh] flex flex-col gap-10 max-w-5xl ">
         <div className="text-6xl w-[80%] mx-auto font-bold">
           This is the fucking header
         </div>

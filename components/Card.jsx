@@ -9,14 +9,14 @@ import Link from "next/link";
 import { motion, useAnimation, useScroll } from "framer-motion";
 import { useEffect, useState } from "react";
 import { inView } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const Card = () => {
   const [data, setData] = useState("");
 
-  const ref = useRef(null);
-
-  inView(ref.current, () => {
-    console.log("Element has entered the viewport");
+  const [ref, inView] = useInView({
+    triggerOnce: true, // Only trigger once when entering the viewport
+    threshold: 0.1, // The percentage of the element that must be in the viewport
   });
 
   const videoVariants = {
@@ -79,7 +79,7 @@ const Card = () => {
         className=" mx-auto col-span-2"
         ref={ref}
       >
-        <video className="w-full rounded-md" loop muted autoPlay>
+        <video className="w-full rounded-md h-screen/2" loop muted autoPlay>
           <source src="video.mp4" />
         </video>
       </motion.div>
@@ -92,21 +92,32 @@ const Card = () => {
         className="col-span-1 flex flex-col gap-4 py-3"
         ref={ref}
       >
-        <h1 className="text-3xl font-bold">This is the first Title</h1>
-        <h3 className="text-lg text-neutral-600 font-semibold">
-          React, NextJS, Prisma, Mysql (Planetscale)
-        </h3>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti,
-          laudantium praesentium facere in neque repellat blanditiis eos
-          assumenda pariatur est.
-        </p>
-        <Link href="https://github.com" className="font-semibold">
-          Github
-        </Link>
-        <Link href="/" className="font-semibold ">
-          View Live
-        </Link>
+        <div className="grid grid-cols-2">
+          <div className="col-span-2">
+            <h1 className="text-3xl font-bold">This is the first Title</h1>
+            <h3 className="text-lg text-neutral-600 font-semibold">
+              React, NextJS, Prisma, Mysql (Planetscale)
+            </h3>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Corrupti, laudantium praesentium facere in neque repellat
+              blanditiis eos assumenda pariatur est.
+            </p>
+          </div>
+
+          <Link
+            href="https://github.com"
+            className="font-semibold py-10 w-full h-full border border-dotted col-span-1 "
+          >
+            Github
+          </Link>
+          <Link
+            href="/"
+            className="font-semibold w-full h-full border border-dotted col-span-1 "
+          >
+            View Live
+          </Link>
+        </div>
       </motion.div>
     </div>
   );
